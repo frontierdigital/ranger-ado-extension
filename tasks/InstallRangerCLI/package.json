@@ -1,0 +1,23 @@
+{
+  "name": "install-ranger-cli-task",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "npx tsc",
+    "clean": "rm -rf ./build ./node_modules",
+    "release": "npm prune --omit=dev",
+    "test": ""
+  },
+  "author": "Frontier Digital Ltd",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "azure-pipelines-task-lib": "^4.4.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.4.2",
+    "@types/q": "^1.5.5",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.6"
+  }
+}

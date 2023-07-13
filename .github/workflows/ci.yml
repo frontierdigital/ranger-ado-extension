@@ -30,4 +30,8 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run clean build release
+      - run: npm run clean
+
+      - run: npm run build
+
+      - run: npm run release

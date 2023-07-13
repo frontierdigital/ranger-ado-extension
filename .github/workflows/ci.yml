@@ -8,6 +8,17 @@ on:
       - main
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+
+      - run: npm ci
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -19,4 +30,4 @@ jobs:
 
       - run: npm ci
 
-      - run: npm test
+      - run: npm run clean build release

@@ -1,0 +1,36 @@
+{
+  "manifestVersion": 1,
+  "id": "ranger",
+  "name": "Ranger",
+  "publisher": "Frontier Digital Ltd",
+  "version": "0.0.1",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "description": "",
+  "categories": [
+    "Azure Pipelines"
+  ],
+  "icons": {
+    "default": "images/extension-icon.png"
+  },
+  "files": [
+    {
+      "path": "tasks/InstallRangerCLI"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "install-ranger-cli",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "tasks/InstallRangerCLI"
+      }
+    }
+  ]
+}

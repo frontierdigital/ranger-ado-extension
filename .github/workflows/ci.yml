@@ -34,6 +34,6 @@ jobs:
 
       - run: npm run build
 
-      - run: npm run prepare
+      - run: npm run prune
 
       - run: npx tfx-cli extension create

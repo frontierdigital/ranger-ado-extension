@@ -4,12 +4,16 @@
   "description": "",
   "scripts": {
     "build": "run-p build:*",
-    "build:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 ci && npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 run build",
+    "build:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 run build",
+    "ci": "run-p ci:*",
+    "ci:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 ci",
     "clean": "run-p clean:*",
     "clean:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 run clean",
+    "install": "run-p install:*",
+    "install:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 install",
     "prune": "run-p prune:*",
     "prune:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 run prune",
-    "publish": "npx tfx-cli extension create",
+    "publish": "tfx extension create",
     "test": "run-p test:*",
     "test:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 test"
   },

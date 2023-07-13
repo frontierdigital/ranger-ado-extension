@@ -7,5 +7,5 @@ node_modules
 
 # other
 .taskkey
-.vsix
 build/
+*.vsix

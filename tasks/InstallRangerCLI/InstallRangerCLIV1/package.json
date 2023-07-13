@@ -5,7 +5,7 @@
   "scripts": {
     "build": "npx tsc",
     "clean": "rm -rf ./build ./node_modules",
-    "release": "npm prune --omit=dev",
+    "prune": "npm prune --omit=dev",
     "test": ""
   },
   "author": "Frontier Digital Ltd",

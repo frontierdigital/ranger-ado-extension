@@ -4,13 +4,13 @@
   "description": "",
   "scripts": {
     "build": "run-p build:*",
-    "build:install-ranger-task": "npm --prefix ./tasks/InstallRangerCLI install && npm --prefix ./tasks/InstallRangerCLI run build",
+    "build:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 install && npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 run build",
     "clean": "run-p clean:*",
-    "clean:install-ranger-task": "npm --prefix ./tasks/InstallRangerCLI run clean",
+    "clean:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 run clean",
     "release": "run-p release:*",
-    "release:install-ranger-task": "npm --prefix ./tasks/InstallRangerCLI run release",
+    "release:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 run release",
     "test": "run-p test:*",
-    "test:install-ranger-task": "npm --prefix ./tasks/InstallRangerCLI test"
+    "test:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 test"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+  "id": "6f993214-4667-458f-85a7-b52e3b4f0862",
+  "name": "InstallRangerCLI",
+  "friendlyName": "Install Ranger CLI",
+  "description": "Installs the Ranger CLI.",
+  "helpUrl": "https://github.com/frontierdigital/ranger-ado-extension/tasks/InstallRangerCLI/README.md",
+  "category": "Utility",
+  "author": "Frontier Digital Ltd",
+  "version": {
+    "Major": 1,
+    "Minor": 0,
+    "Patch": 1
+  },
+  "instanceNameFormat": "Install Ranger CLI ($(version))",
+  "inputs": [
+    {
+      "name": "version",
+      "type": "string",
+      "label": "Version",
+      "defaultValue": "1",
+      "required": true,
+      "helpMarkDown": "The Ranger CLI version to install."
+    }
+  ],
+  "execution": {
+    "Node": {
+      "target": "build/index.js"
+    }
+  }
+}

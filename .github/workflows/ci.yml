@@ -22,7 +22,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: output
-          path: ${{ github.workspace }}/output/"
+          path: ${{ github.workspace }}/output/*.vsix"
           if-no-files-found: error
   publish:
     runs-on: ubuntu-latest

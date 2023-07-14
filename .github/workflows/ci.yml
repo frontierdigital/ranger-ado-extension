@@ -39,4 +39,12 @@ jobs:
         with:
           name: output
           path: ${{ github.workspace }}/output/
-      - run: npx tfx-cli extension publish --token "${{ secrets.VISUAL_STUDIO_MARKETPLACE_TOKEN }}" --share-with "${{ secrets.VISUAL_STUDIO_MARKETPLACE_PUBLISHER }}" --service-url https://marketplace.visualstudio.com --vsix $(find ${{ steps.download.outputs.download-path }} -regex ".*\.\(vsix\)")
+      - run: cat "${GITHUB_WORKSPACE}/package.json" | jq -r ".version"
+      - run: |
+          VERSION=$(cat "${GITHUB_WORKSPACE}/package.json" | jq -r ".version")
+          npx tfx-cli extension publish \
+            --service-url https://marketplace.visualstudio.com \
+            --token "${{ secrets.VISUAL_STUDIO_MARKETPLACE_TOKEN }}" \
+            --vsix $(find ${{ steps.download.outputs.download-path }} -regex ".*\.\(vsix\)") \
+            --override "{ \"version\": \"${VERSION}\" }" \
+            --share-with "${{ secrets.VISUAL_STUDIO_MARKETPLACE_PUBLISHER }}"

@@ -1,4 +1,5 @@
-import axios from 'axios';
+// import axios from 'axios';
+import { Axios } from 'axios';
 import fs = require('fs');
 // import http = require('http');
 // import got = require('got');
@@ -38,14 +39,19 @@ async function run() {
 
     // http.get()
 
-    axios({
-      method: 'get',
-      url: downloadUrl,
-      responseType: 'stream'
-    })
+    // const saxios = new axios.Axios()
+    (new Axios()).get(downloadUrl)
       .then(function (response: any) {
         response.data.pipe(fs.createWriteStream(downloadPath))
       });
+    // axios({
+    //   method: 'get',
+    //   url: downloadUrl,
+    //   responseType: 'stream'
+    // })
+    //   .then(function (response: any) {
+    //     response.data.pipe(fs.createWriteStream(downloadPath))
+    //   });
 
     tl.mkdirP(toolDirPath);
     const exitCode = await tl.exec('tar', ['-xf', `"${downloadPath}"`, '-C', `"${toolDirPath}"`]);

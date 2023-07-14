@@ -1,6 +1,6 @@
 {
   "name": "install-ranger-cli-task",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "scripts": {
     "build": "run-p build:*",
@@ -18,7 +18,6 @@
     "azure-pipelines-task-lib": "^4.4.0"
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.4.2",
     "@types/q": "^1.5.5",

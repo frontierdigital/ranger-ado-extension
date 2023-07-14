@@ -22,15 +22,15 @@ async function run() {
       platform = agentOSArchitecture;
     }
 
-    console.debug(`Platform: ${platform}`);
+    tl.debug(`Platform: ${platform}`);
 
     const downloadUrl = `https://github.com/frontierdigital/ranger/releases/download/${version}/ranger_${agentOS}_${platform}.tar.gz`;
     const downloadPath = path.join(agentTempDirectory as string, `ranger_${agentOS}_${platform}.tar.gz`);
     const toolDirPath = `${agentToolsDirectory}/ranger/${version}/${platform}`;
 
-    console.debug(`Download URL: ${downloadUrl}`);
-    console.debug(`Download path: ${downloadPath}`);
-    console.debug(`Tool directory path: ${toolDirPath}`);
+    tl.debug(`Download URL: ${downloadUrl}`);
+    tl.debug(`Download path: ${downloadPath}`);
+    tl.debug(`Tool directory path: ${toolDirPath}`);
 
     // const file = fs.createWriteStream(downloadPath);
     // const gotStream = got.stream.get(downloadUrl);

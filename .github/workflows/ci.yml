@@ -22,7 +22,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: output
-          path: "./output"
+          path: ${{ env.GITHUB_WORKSPACE }}/output"
   publish:
     runs-on: ubuntu-latest
     environment: visual-studio-marketplace
@@ -33,3 +33,4 @@ jobs:
         with:
           node-version-file: .nvmrc
       - run: npm ci
+      - run: npx tfx-cli extension publish --token "${{ secrets.VISUAL_STUDIO_MARKETPLACE_TOKEN }}" --share-with "${{ secrets.VISUAL_STUDIO_MARKETPLACE_PUBLISHER }}" --service-url https://marketplace.visualstudio.com --vsix "${{ needs.build.outputs.path }}"

@@ -44,7 +44,6 @@ jobs:
     environment: visual-studio-marketplace
     needs: build
     steps:
-      # - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ needs.build.outputs.node_version }}

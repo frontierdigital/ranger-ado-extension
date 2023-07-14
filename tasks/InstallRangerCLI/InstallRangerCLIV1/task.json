@@ -13,7 +13,7 @@
       "name": "version",
       "type": "string",
       "label": "Version",
-      "defaultValue": "1",
+      "defaultValue": "v0.0.3-pre",
       "required": true,
       "helpMarkDown": "The Ranger CLI version to install."
     }

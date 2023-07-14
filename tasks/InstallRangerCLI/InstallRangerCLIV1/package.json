@@ -9,17 +9,21 @@
     "clean": "rm -rf ./build ./node_modules",
     "prune": "npm prune --omit=dev",
     "test": "run-p test:*",
-    "test:js": "eslint ."
+    "test:js": "eslint . --ext .ts"
   },
   "author": "Frontier Digital Ltd",
   "license": "GPL-3.0",
   "dependencies": {
-    "azure-pipelines-task-lib": "^4.4.0"
+    "azure-pipelines-task-lib": "^4.4.0",
+    "got": "^13.0.0"
   },
   "devDependencies": {
+    "@types/got": "^9.6.12",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.4.2",
     "@types/q": "^1.5.5",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.44.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",

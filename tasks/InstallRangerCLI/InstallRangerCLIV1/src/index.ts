@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import { Axios } from 'axios';
+import axios = require('axios');
 import fs = require('fs');
 // import http = require('http');
 // import got = require('got');
@@ -39,11 +39,17 @@ async function run() {
 
     // http.get()
 
-    // const saxios = new axios.Axios()
-    (new Axios()).get(downloadUrl)
+    // axios.default.get
+
+    axios.default.get(downloadUrl)
       .then(function (response: any) {
         response.data.pipe(fs.createWriteStream(downloadPath))
       });
+    // const saxios = new axios.Axios()
+    // (new Axios()).get(downloadUrl)
+    //   .then(function (response: any) {
+    //     response.data.pipe(fs.createWriteStream(downloadPath))
+    //   });
     // axios({
     //   method: 'get',
     //   url: downloadUrl,

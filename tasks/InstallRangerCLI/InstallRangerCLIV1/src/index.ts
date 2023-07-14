@@ -35,7 +35,10 @@ async function run() {
     await streamPipeline(gotStream, outStream);
 
     tl.mkdirP(toolDirPath);
-    await tl.exec('tar', ['-xf', `"${downloadPath}"`, '-C', `"${toolDirPath}"`]);
+    const exitCode = await tl.exec('tar', ['-xf', `"${downloadPath}"`, '-C', `"${toolDirPath}"`]);
+    if (exitCode != 0) {
+      throw new Error('Failed to extract Ranger CLI');
+    }
     console.log(`##vso[task.prependpath]${toolDirPath}`);
 
     tl.setResult(tl.TaskResult.Succeeded, 'Success');

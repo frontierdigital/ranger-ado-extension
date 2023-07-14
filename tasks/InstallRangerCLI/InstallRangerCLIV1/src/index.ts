@@ -43,7 +43,7 @@ async function run() {
       url: downloadUrl,
       responseType: 'stream'
     })
-      .then(function (response) {
+      .then(function (response: any) {
         response.data.pipe(fs.createWriteStream(downloadPath))
       });
 
@@ -55,7 +55,6 @@ async function run() {
     console.log(`##vso[task.prependpath]${toolDirPath}`);
 
     tl.setResult(tl.TaskResult.Succeeded, 'Success');
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     tl.setResult(tl.TaskResult.Failed, err.message);
   }

@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 
-const { Axios } = require('axios');
+const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
+const stream = require('stream');
 const tl = require('azure-pipelines-task-lib/task');
+const { promisify } = require('util');
+
+const finished = promisify(stream.finished);
 
 async function run() {
   try {
@@ -41,18 +45,21 @@ async function run() {
 
     const writer = fs.createWriteStream(downloadPath);
 
-    const response = await Axios({
-      downloadUrl,
+    await axios({
+      url: downloadUrl,
       method: 'get',
       responseType: 'stream',
+    }).then((response) => {
+      response.data.pipe(writer);
+      return finished(writer);
     });
 
-    response.data.pipe(writer);
+    // response.data.pipe(writer);
 
-    await new Promise((resolve, reject) => {
-      writer.on('finish', resolve);
-      writer.on('error', reject);
-    });
+    // await new Promise((resolve, reject) => {
+    //   writer.on('finish', resolve);
+    //   writer.on('error', reject);
+    // });
 
     // await axios.default.get(downloadUrl)
     //   .then((response) => {

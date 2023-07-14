@@ -25,8 +25,6 @@ async function run() {
       platform = agentOSArchitecture;
     }
 
-    tl.debug(`Platform: ${platform}`);
-
     const downloadUrl = `https://github.com/frontierdigital/ranger/releases/download/${version}/ranger_${agentOS}_${platform}.tar.gz`;
     const downloadPath = path.join(agentTempDirectory, `ranger_${agentOS}_${platform}.tar.gz`);
     const toolDirPath = `${agentToolsDirectory}/ranger/${version}/${platform}`;
@@ -63,6 +61,9 @@ async function run() {
 
     // eslint-disable-next-line no-console
     console.log(`##vso[task.prependpath]${toolDirPath}`);
+
+    // eslint-disable-next-line no-console
+    console.log(`Ranger CLI ${version} installed successfully.`);
 
     tl.setResult(tl.TaskResult.Succeeded, 'Success');
   } catch (err) {

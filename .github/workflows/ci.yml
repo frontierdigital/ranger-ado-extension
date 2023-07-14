@@ -21,6 +21,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    needs: setup
     steps:
       - uses: actions/checkout@v3
 
@@ -34,4 +35,9 @@ jobs:
 
       - run: npm run prune
 
-      - run: npx tfx-cli extension create
+      - run: npx tfx-cli extension create --output-path "${GITHUB_WORKSPACE}/output"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: output
+          path: "${GITHUB_WORKSPACE}/output"

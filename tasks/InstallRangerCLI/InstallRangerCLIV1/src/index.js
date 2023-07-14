@@ -47,7 +47,7 @@ async function run() {
       return response;
     });
 
-    await axios({
+    await client({
       url: downloadUrl,
       method: 'get',
       responseType: 'stream',
@@ -56,13 +56,11 @@ async function run() {
       return finished(writer);
     });
 
-    tl.debug(await tl.exec('ls', ['-al', `"${downloadPath}"`]));
+    tl.debug(await tl.exec('ls', ['-al', agentTempDirectory]));
 
     tl.mkdirP(toolDirPath);
-    const exitCode = await tl.exec('tar', ['-xf', `"${downloadPath}"`, '-C', `"${toolDirPath}"`]);
-    if (exitCode !== 0) {
-      throw new Error('Failed to extract Ranger CLI');
-    }
+    await tl.exec('tar', ['-xf', downloadPath, '-C', toolDirPath]);
+
     // eslint-disable-next-line no-console
     console.log(`##vso[task.prependpath]${toolDirPath}`);
 

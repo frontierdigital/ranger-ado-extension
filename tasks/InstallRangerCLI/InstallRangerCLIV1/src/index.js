@@ -1,24 +1,22 @@
-// import axios from 'axios';
-import axios = require('axios');
-import fs = require('fs');
-// import http = require('http');
-// import got = require('got');
-import path = require('path');
-import tl = require('azure-pipelines-task-lib/task');
-// import { pipeline as streamPipeline } from 'stream/promises';
+#!/usr/bin/env node
+
+const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
+const tl = require('azure-pipelines-task-lib/task');
 
 async function run() {
   try {
-    const version: string | undefined = tl.getInput('version', true);
+    const version = tl.getInput('version', true);
 
-    const agentOS: string | undefined = tl.getVariable("Agent.OS")
-    const agentOSArchitecture: string | undefined = tl.getVariable("Agent.OSArchitecture");
-    const agentTempDirectory: string | undefined = tl.getVariable("Agent.TempDirectory");
-    const agentToolsDirectory: string | undefined = tl.getVariable("Agent.ToolsDirectory");
+    const agentOS = tl.getVariable('Agent.OS');
+    const agentOSArchitecture = tl.getVariable('Agent.OSArchitecture');
+    const agentTempDirectory = tl.getVariable('Agent.TempDirectory');
+    const agentToolsDirectory = tl.getVariable('Agent.ToolsDirectory');
 
     let platform;
-    if (agentOSArchitecture == "X64" || agentOSArchitecture == "X86") {
-      platform = "x86_64";
+    if (agentOSArchitecture === 'X64' || agentOSArchitecture === 'X86') {
+      platform = 'x86_64';
     } else {
       platform = agentOSArchitecture;
     }
@@ -26,7 +24,7 @@ async function run() {
     tl.debug(`Platform: ${platform}`);
 
     const downloadUrl = `https://github.com/frontierdigital/ranger/releases/download/${version}/ranger_${agentOS}_${platform}.tar.gz`;
-    const downloadPath = path.join(agentTempDirectory as string, `ranger_${agentOS}_${platform}.tar.gz`);
+    const downloadPath = path.join(agentTempDirectory, `ranger_${agentOS}_${platform}.tar.gz`);
     const toolDirPath = `${agentToolsDirectory}/ranger/${version}/${platform}`;
 
     tl.debug(`Download URL: ${downloadUrl}`);
@@ -42,8 +40,8 @@ async function run() {
     // axios.default.get
 
     await axios.default.get(downloadUrl)
-      .then(function (response: axios.AxiosResponse) {
-        response.data.pipe(fs.createWriteStream(downloadPath))
+      .then((response) => {
+        response.data.pipe(fs.createWriteStream(downloadPath));
       });
     // const saxios = new axios.Axios()
     // (new Axios()).get(downloadUrl)
@@ -61,9 +59,10 @@ async function run() {
 
     tl.mkdirP(toolDirPath);
     const exitCode = await tl.exec('tar', ['-xf', `"${downloadPath}"`, '-C', `"${toolDirPath}"`]);
-    if (exitCode != 0) {
+    if (exitCode !== 0) {
       throw new Error('Failed to extract Ranger CLI');
     }
+    // eslint-disable-next-line no-console
     console.log(`##vso[task.prependpath]${toolDirPath}`);
 
     tl.setResult(tl.TaskResult.Succeeded, 'Success');

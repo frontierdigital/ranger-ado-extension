@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const axios = require('axios');
+const { Axios } = require('axios');
 const fs = require('fs');
 const path = require('path');
 const tl = require('azure-pipelines-task-lib/task');
@@ -39,10 +39,25 @@ async function run() {
 
     // axios.default.get
 
-    await axios.default.get(downloadUrl)
-      .then((response) => {
-        response.data.pipe(fs.createWriteStream(downloadPath));
-      });
+    const writer = fs.createWriteStream(downloadPath);
+
+    const response = await Axios({
+      downloadUrl,
+      method: 'get',
+      responseType: 'stream',
+    });
+
+    response.data.pipe(writer);
+
+    await new Promise((resolve, reject) => {
+      writer.on('finish', resolve);
+      writer.on('error', reject);
+    });
+
+    // await axios.default.get(downloadUrl)
+    //   .then((response) => {
+    //     response.data.pipe(fs.createWriteStream(downloadPath));
+    //   });
     // const saxios = new axios.Axios()
     // (new Axios()).get(downloadUrl)
     //   .then(function (response: any) {

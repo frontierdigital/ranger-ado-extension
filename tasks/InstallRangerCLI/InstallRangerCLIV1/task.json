@@ -20,7 +20,8 @@
   ],
   "execution": {
     "Node16": {
-      "target": "src/index.js"
+      "target": "src/index.js",
+      "argumentFormat": ""
     }
   }
 }

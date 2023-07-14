@@ -23,8 +23,9 @@ jobs:
         with:
           name: output
           path: "./output"
-  setup:
+  publish:
     runs-on: ubuntu-latest
+    environment: visual-studio-marketplace
     needs: build
     steps:
       - uses: actions/checkout@v3

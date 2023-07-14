@@ -1,6 +1,6 @@
 {
   "name": "ranger-ado-extension",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "",
   "scripts": {
     "build": "run-p build:*",

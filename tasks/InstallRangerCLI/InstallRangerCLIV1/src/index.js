@@ -35,15 +35,17 @@ async function run() {
     tl.debug(`Download path: ${downloadPath}`);
     tl.debug(`Tool directory path: ${toolDirPath}`);
 
-    // const file = fs.createWriteStream(downloadPath);
-    // const gotStream = got.stream.get(downloadUrl);
-    // await streamPipeline(gotStream, outStream);
-
-    // http.get()
-
-    // axios.default.get
-
     const writer = fs.createWriteStream(downloadPath);
+
+    const client = axios.create();
+    client.interceptors.request.use((request) => {
+      tl.debug(`Axios request: ${request.method} ${request.url} `);
+      return request;
+    });
+    client.interceptors.response.use((response) => {
+      tl.debug(`Axios response: ${response.status} ${response.statusText}`);
+      return response;
+    });
 
     await axios({
       url: downloadUrl,
@@ -54,30 +56,7 @@ async function run() {
       return finished(writer);
     });
 
-    // response.data.pipe(writer);
-
-    // await new Promise((resolve, reject) => {
-    //   writer.on('finish', resolve);
-    //   writer.on('error', reject);
-    // });
-
-    // await axios.default.get(downloadUrl)
-    //   .then((response) => {
-    //     response.data.pipe(fs.createWriteStream(downloadPath));
-    //   });
-    // const saxios = new axios.Axios()
-    // (new Axios()).get(downloadUrl)
-    //   .then(function (response: any) {
-    //     response.data.pipe(fs.createWriteStream(downloadPath))
-    //   });
-    // axios({
-    //   method: 'get',
-    //   url: downloadUrl,
-    //   responseType: 'stream'
-    // })
-    //   .then(function (response: any) {
-    //     response.data.pipe(fs.createWriteStream(downloadPath))
-    //   });
+    tl.debug(await tl.exec('ls', ['-al', `"${downloadPath}"`]));
 
     tl.mkdirP(toolDirPath);
     const exitCode = await tl.exec('tar', ['-xf', `"${downloadPath}"`, '-C', `"${toolDirPath}"`]);

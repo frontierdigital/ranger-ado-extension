@@ -1,8 +1,10 @@
+import axios from 'axios';
 import fs = require('fs');
-import got = require('got');
+// import http = require('http');
+// import got = require('got');
 import path = require('path');
 import tl = require('azure-pipelines-task-lib/task');
-import { pipeline as streamPipeline } from 'stream/promises';
+// import { pipeline as streamPipeline } from 'stream/promises';
 
 async function run() {
   try {
@@ -30,9 +32,20 @@ async function run() {
     console.debug(`Download path: ${downloadPath}`);
     console.debug(`Tool directory path: ${toolDirPath}`);
 
-    const gotStream = got.stream.get(downloadUrl);
-    const outStream = fs.createWriteStream(downloadPath);
-    await streamPipeline(gotStream, outStream);
+    // const file = fs.createWriteStream(downloadPath);
+    // const gotStream = got.stream.get(downloadUrl);
+    // await streamPipeline(gotStream, outStream);
+
+    // http.get()
+
+    axios({
+      method: 'get',
+      url: downloadUrl,
+      responseType: 'stream'
+    })
+      .then(function (response) {
+        response.data.pipe(fs.createWriteStream(downloadPath))
+      });
 
     tl.mkdirP(toolDirPath);
     const exitCode = await tl.exec('tar', ['-xf', `"${downloadPath}"`, '-C', `"${toolDirPath}"`]);

@@ -22,7 +22,8 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: output
-          path: ${{ github.workspace }}/output"
+          path: ${{ github.workspace }}/output/"
+          if-no-files-found: error
   publish:
     runs-on: ubuntu-latest
     environment: visual-studio-marketplace
@@ -33,4 +34,8 @@ jobs:
         with:
           node-version-file: .nvmrc
       - run: npm ci
-      - run: npx tfx-cli extension publish --token "${{ secrets.VISUAL_STUDIO_MARKETPLACE_TOKEN }}" --share-with "${{ secrets.VISUAL_STUDIO_MARKETPLACE_PUBLISHER }}" --service-url https://marketplace.visualstudio.com --vsix "${{ needs.build.outputs.path }}"
+      - uses: actions/download-artifact@v3
+        id: download
+        with:
+          name: output
+      - run: npx tfx-cli extension publish --token "${{ secrets.VISUAL_STUDIO_MARKETPLACE_TOKEN }}" --share-with "${{ secrets.VISUAL_STUDIO_MARKETPLACE_PUBLISHER }}" --service-url https://marketplace.visualstudio.com --vsix "${{ steps.download.outputs.download-path }}/FrontierDigital.Ranger-0.0.1.vsix"

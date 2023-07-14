@@ -11,6 +11,7 @@ async function run() {
     const agentOS: string | undefined = tl.getVariable("Agent.OS")
     const agentOSArchitecture: string | undefined = tl.getVariable("Agent.OSArchitecture");
     const agentTempDirectory: string | undefined = tl.getVariable("Agent.TempDirectory");
+    const agentToolsDirectory: string | undefined = tl.getVariable("Agent.ToolsDirectory");
 
     let platform;
     if (agentOSArchitecture == "X64" || agentOSArchitecture == "X86") {
@@ -19,13 +20,23 @@ async function run() {
       platform = agentOSArchitecture;
     }
 
+    console.debug(`Platform: ${platform}`);
+
     const downloadUrl = `https://github.com/frontierdigital/ranger/releases/download/${version}/ranger_${agentOS}_${platform}.tar.gz`;
+    const downloadPath = path.join(agentTempDirectory as string, `ranger_${agentOS}_${platform}.tar.gz`);
+    const toolDirPath = `${agentToolsDirectory}/ranger/${version}/${platform}`;
+
+    console.debug(`Download URL: ${downloadUrl}`);
+    console.debug(`Download path: ${downloadPath}`);
+    console.debug(`Tool directory path: ${toolDirPath}`);
 
     const gotStream = got.stream.get(downloadUrl);
-
-    const outStream = fs.createWriteStream(path.join(agentTempDirectory as string, `ranger_${agentOS}_${platform}.tar.gz`));
-
+    const outStream = fs.createWriteStream(downloadPath);
     await streamPipeline(gotStream, outStream);
+
+    tl.mkdirP(toolDirPath);
+    await tl.exec('tar', ['-xf', `"${downloadPath}"`, '-C', `"${toolDirPath}"`]);
+    console.log(`##vso[task.prependpath]${toolDirPath}`);
 
     tl.setResult(tl.TaskResult.Succeeded, 'Success');
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

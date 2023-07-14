@@ -38,4 +38,4 @@ jobs:
         id: download
         with:
           name: output
-      - run: npx tfx-cli extension publish --token "${{ secrets.VISUAL_STUDIO_MARKETPLACE_TOKEN }}" --share-with "${{ secrets.VISUAL_STUDIO_MARKETPLACE_PUBLISHER }}" --service-url https://marketplace.visualstudio.com --vsix "${{ steps.download.outputs.download-path }}/FrontierDigital.Ranger-0.0.1.vsix"
+      - run: npx tfx-cli extension publish --token "${{ secrets.VISUAL_STUDIO_MARKETPLACE_TOKEN }}" --share-with "${{ secrets.VISUAL_STUDIO_MARKETPLACE_PUBLISHER }}" --service-url https://marketplace.visualstudio.com --vsix $(find ${{ steps.download.outputs.download-path }} -regex ".*\.\(vsix\))"

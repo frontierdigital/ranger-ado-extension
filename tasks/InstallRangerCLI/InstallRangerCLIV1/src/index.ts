@@ -41,8 +41,8 @@ async function run() {
 
     // axios.default.get
 
-    axios.default.get(downloadUrl)
-      .then(function (response: any) {
+    await axios.default.get(downloadUrl)
+      .then(function (response: axios.AxiosResponse) {
         response.data.pipe(fs.createWriteStream(downloadPath))
       });
     // const saxios = new axios.Axios()
@@ -67,8 +67,12 @@ async function run() {
     console.log(`##vso[task.prependpath]${toolDirPath}`);
 
     tl.setResult(tl.TaskResult.Succeeded, 'Success');
-  } catch (err: any) {
-    tl.setResult(tl.TaskResult.Failed, err.message);
+  } catch (err) {
+    if (err instanceof Error) {
+      tl.setResult(tl.TaskResult.Failed, err.message);
+    } else {
+      tl.setResult(tl.TaskResult.Failed, 'Unknown error');
+    }
   }
 }
 

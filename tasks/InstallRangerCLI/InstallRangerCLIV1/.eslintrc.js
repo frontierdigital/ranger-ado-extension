@@ -12,7 +12,7 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
-    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-explicit-any': 'error',
     'linebreak-style': ['error', (process.platform === 'win32' ? 'windows' : 'unix')],
   },
 };

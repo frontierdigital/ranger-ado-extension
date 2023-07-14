@@ -22,7 +22,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: output
-          path: ${{ env.GITHUB_WORKSPACE }}/output"
+          path: ${{ github.workspace }}/output"
   publish:
     runs-on: ubuntu-latest
     environment: visual-studio-marketplace

@@ -1,6 +1,6 @@
 {
   "name": "install-ranger-cli-task",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
   "scripts": {
     "build": "run-p build:*",
@@ -12,7 +12,7 @@
   "author": "Frontier Digital Ltd",
   "license": "GPL-3.0",
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^1.4.0",
     "azure-pipelines-task-lib": "^4.4.0"
   },
   "devDependencies": {

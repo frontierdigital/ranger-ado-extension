@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const tl = require('azure-pipelines-task-lib/task');
 
-async function run() {
+const run = async () => {
   try {
     const version = tl.getInput('version', true);
 
@@ -73,6 +73,6 @@ async function run() {
       tl.setResult(tl.TaskResult.Failed, 'Unknown error');
     }
   }
-}
+};
 
 run();

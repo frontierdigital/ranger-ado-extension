@@ -1,19 +1,19 @@
 {
   "name": "ranger-ado-extension",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "",
   "scripts": {
     "build": "run-p build:*",
-    "build:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 run build",
+    "build:install-ranger-cli-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 run build",
     "ci": "run-p ci:*",
-    "ci:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 ci",
+    "ci:install-ranger-cli-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 ci",
     "install": "run-p install:*",
-    "install:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 install",
+    "install:install-ranger-cli-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 install",
     "prune": "run-p prune:*",
-    "prune:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 run prune",
+    "prune:install-ranger-cli-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 run prune",
     "publish": "tfx extension create",
     "test": "run-p test:*",
-    "test:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 test"
+    "test:install-ranger-cli-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 test"
   },
   "repository": {
     "type": "git",

@@ -1,8 +1,10 @@
 {
   "name": "ranger-ado-extension",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "",
   "scripts": {
+    "build": "run-p build:*",
+    "build:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 run build",
     "ci": "run-p ci:*",
     "ci:install-ranger-task-v1": "npm --prefix ./tasks/InstallRangerCLI/InstallRangerCLIV1 ci",
     "install": "run-p install:*",

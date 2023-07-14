@@ -20,7 +20,7 @@
   ],
   "execution": {
     "Node": {
-      "target": "build/index.js"
+      "target": "src/index.js"
     }
   }
 }

@@ -1,0 +1,24 @@
+---
+name: Publish
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: visual-studio-marketplace
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install -g tfx-cli
+      - run: echo ${{ github.event.release.tag_name }}
+      # - run: |
+      #     npx tfx-cli extension publish \
+      #       --vsix $(find ${{ steps.download.outputs.download-path }} -regex ".*\.\(vsix\)") \
+      #       --service-url https://marketplace.visualstudio.com \
+      #       --token "${{ secrets.VISUAL_STUDIO_MARKETPLACE_TOKEN }}" \
+      #       --share-with "${{ secrets.VISUAL_STUDIO_MARKETPLACE_PUBLISHER }}"

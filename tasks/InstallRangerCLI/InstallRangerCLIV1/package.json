@@ -1,6 +1,6 @@
 {
   "name": "install-ranger-cli-task",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "",
   "scripts": {
     "prune": "npm prune --omit=dev",

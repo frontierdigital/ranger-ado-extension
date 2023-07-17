@@ -5,10 +5,12 @@ const path = require('path');
 const tempdir = require('tempdir');
 const { rimraf } = require('rimraf');
 
+const { version } = require('../package.json');
+
 const exec = require('./helpers/exec');
 
-const release = async () => {
-  const version = process.argv[2];
+const build = async () => {
+  const packageVersion = process.argv[2] || version;
 
   const manifestDefinition = JSON.parse(await fs.promises.readFile(path.join(process.cwd(), 'vss-extension.json'), 'utf8'));
 
@@ -59,7 +61,7 @@ const release = async () => {
   await exec(
     [
       'npx tfx extension create',
-      `--override '${JSON.stringify({ version })}'`,
+      `--override '${JSON.stringify({ version: packageVersion })}'`,
       `--output-path "${path.join(process.cwd(), 'dist')}"`,
     ].join(' '),
     {
@@ -71,4 +73,4 @@ const release = async () => {
   await rimraf(tempDirPath);
 };
 
-release();
+build();

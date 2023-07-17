@@ -13,10 +13,7 @@ jobs:
       version: ${{ steps.get_version.outputs.version }}
     steps:
       - id: get_version
-        run: |
-          echo ${{ github.tag_name }}
-          version=$(echo "${{ github.ref }}" | cut -d "/" -f 3)
-          echo "version=${version}" >> "$GITHUB_OUTPUT"
+        run: echo "version=${GITHUB_REF#refs/*/}" >> "$GITHUB_OUTPUT"
   build:
     uses: ./.github/workflows/build.yml
     needs: preflight
@@ -32,7 +29,7 @@ jobs:
         id: download
         with:
           name: dist
-          path: ${{ github.workspace }}/dist/
+          path: ${{ github.workspace }}
       - id: create_release
         uses: actions/create-release@v1
         env:
@@ -47,6 +44,28 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/dist/FrontierDigital.Ranger-${{ needs.preflight.outputs.version }}.vsix
+          asset_path: ${{ github.workspace }}/FrontierDigital.Ranger-${{ needs.preflight.outputs.version }}.vsix
           asset_name: FrontierDigital.Ranger-${{ needs.preflight.outputs.version }}.vsix
           asset_content_type: application/gzip
+  publish:
+    runs-on: ubuntu-latest
+    needs:
+      - preflight
+      - build
+    environment: visual-studio-marketplace
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ needs.build.outputs.node_version }}
+      - run: npm install -g "tfx-cli@${{ needs.build.outputs.tfx_cli_version }}"
+      - uses: actions/download-artifact@v3
+        id: download
+        with:
+          name: dist
+          path: ${{ github.workspace }}
+      - run: |
+          npx tfx-cli extension publish \
+            --vsix "${GITHUB_WORKSPACE}/FrontierDigital.Ranger-${{ needs.preflight.outputs.version }}.vsix" \
+            --service-url https://marketplace.visualstudio.com \
+            --token "${{ secrets.VISUAL_STUDIO_MARKETPLACE_TOKEN }}" \
+            --share-with "${{ secrets.VISUAL_STUDIO_MARKETPLACE_PUBLISHER }}"

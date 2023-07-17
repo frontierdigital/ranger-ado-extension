@@ -3,7 +3,7 @@
   "id": "4db7ede4-6c01-4068-944c-bbf7ec004ba1",
   "name": "PromoteSet",
   "friendlyName": "Promote set",
-  "description": "Promotes a set.",
+  "description": "Promotes a set using Ranger",
   "helpUrl": "https://github.com/frontierdigital/ranger-ado-extension/tasks/PromoteSet/README.md",
   "category": "Utility",
   "author": "Frontier Digital Ltd",
@@ -13,7 +13,7 @@
       "type": "string",
       "label": "Target environment",
       "required": true,
-      "helpMarkDown": "The target environment."
+      "helpMarkDown": "The target environment to promote this set to"
     }
   ],
   "execution": {

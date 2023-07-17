@@ -3,7 +3,7 @@
   "id": "a8d3b79d-2c65-41fc-9593-f33365a6d526",
   "name": "DeploySet",
   "friendlyName": "Deploy set",
-  "description": "Deploys a set.",
+  "description": "Deploys a set using Ranger",
   "helpUrl": "https://github.com/frontierdigital/ranger-ado-extension/tasks/DeploySet/README.md",
   "category": "Utility",
   "author": "Frontier Digital Ltd",
@@ -13,35 +13,35 @@
       "type": "string",
       "label": "Git user email address",
       "required": true,
-      "helpMarkDown": "The git user email address."
+      "helpMarkDown": "The git user email address"
     },
     {
       "name": "gitUserName",
       "type": "string",
       "label": "Git user name",
       "required": true,
-      "helpMarkDown": "The git user name."
+      "helpMarkDown": "The git user namet"
     },
     {
       "name": "organisationName",
       "type": "string",
       "label": "Organisation name",
       "required": true,
-      "helpMarkDown": "The Azure DevOps organisation name."
+      "helpMarkDown": "The Azure DevOps organisation name"
     },
     {
       "name": "pat",
       "type": "string",
       "label": "Personal access token",
       "required": true,
-      "helpMarkDown": "The personal access token."
+      "helpMarkDown": "The personal access token"
     },
     {
       "name": "projectName",
       "type": "string",
       "label": "Project name",
       "required": true,
-      "helpMarkDown": "The Azure DevOps project name."
+      "helpMarkDown": "The Azure DevOps project name"
     }
   ],
   "execution": {

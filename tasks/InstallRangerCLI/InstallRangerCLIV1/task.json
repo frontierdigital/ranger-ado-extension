@@ -3,7 +3,7 @@
   "id": "6f993214-4667-458f-85a7-b52e3b4f0862",
   "name": "InstallRangerCLI",
   "friendlyName": "Install Ranger CLI",
-  "description": "Installs the Ranger CLI.",
+  "description": "Installs the Ranger CLI",
   "helpUrl": "https://github.com/frontierdigital/ranger-ado-extension/tasks/InstallRangerCLI/README.md",
   "category": "Utility",
   "author": "Frontier Digital Ltd",
@@ -13,7 +13,7 @@
       "type": "string",
       "label": "Version",
       "required": true,
-      "helpMarkDown": "The Ranger CLI version to install."
+      "helpMarkDown": "The Ranger CLI version to install"
     }
   ],
   "execution": {

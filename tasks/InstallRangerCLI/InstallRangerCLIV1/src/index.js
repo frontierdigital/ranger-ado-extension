@@ -54,13 +54,13 @@ async function run() {
       return finished(writer);
     });
 
-    tl.debug(await tl.exec('ls', ['-al', agentTempDirectory]));
-
     tl.mkdirP(toolDirPath);
     await tl.exec('tar', ['-xf', downloadPath, '-C', toolDirPath]);
 
     // eslint-disable-next-line no-console
     console.log(`##vso[task.prependpath]${toolDirPath}`);
+
+    await tl.exec('ranger', ['version']);
 
     // eslint-disable-next-line no-console
     console.log(`Ranger CLI ${version} installed successfully.`);

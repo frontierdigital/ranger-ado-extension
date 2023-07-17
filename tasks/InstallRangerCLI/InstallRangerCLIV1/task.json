@@ -7,7 +7,6 @@
   "helpUrl": "https://github.com/frontierdigital/ranger-ado-extension/tasks/InstallRangerCLI/README.md",
   "category": "Utility",
   "author": "Frontier Digital Ltd",
-  "instanceNameFormat": "Install Ranger CLI ($(version))",
   "inputs": [
     {
       "name": "version",

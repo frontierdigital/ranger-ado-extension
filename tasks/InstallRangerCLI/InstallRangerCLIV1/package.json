@@ -1,6 +1,6 @@
 {
   "name": "install-ranger-cli-task",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "",
   "scripts": {
     "build": "run-p build:*",

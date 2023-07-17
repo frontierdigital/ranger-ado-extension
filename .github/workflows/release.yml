@@ -44,8 +44,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/FrontierDigital.Ranger-${{ needs.preflight.outputs.version }}.vsix
-          asset_name: FrontierDigital.Ranger-${{ needs.preflight.outputs.version }}.vsix
+          asset_path: "${{ github.workspace }}/FrontierDigital.Ranger-${{ needs.preflight.outputs.version }}.vsix"
+          asset_name: "FrontierDigital.Ranger-${{ needs.preflight.outputs.version }}.vsix"
           asset_content_type: application/gzip
   publish:
     runs-on: ubuntu-latest

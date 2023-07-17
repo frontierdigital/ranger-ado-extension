@@ -8,6 +8,11 @@ on:
         required: false
         default: "0.0.0"
         type: string
+    outputs:
+      node_version:
+        value: ${{ jobs.build.outputs.node_version }}
+      tfx_cli_version:
+        value: ${{ jobs.build.outputs.tfx_cli_version }}
 
 jobs:
   build:
@@ -28,7 +33,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: dist
-          path: ${{ github.workspace }}/dist/
+          path: "${{ github.workspace }}/dist/"
           if-no-files-found: error
       - id: get_node_version
         run: |

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+  "id": "4db7ede4-6c01-4068-944c-bbf7ec004ba1",
+  "name": "PromoteSet",
+  "friendlyName": "Promote set",
+  "description": "Promotes a set.",
+  "helpUrl": "https://github.com/frontierdigital/ranger-ado-extension/tasks/PromoteSet/README.md",
+  "category": "Utility",
+  "author": "Frontier Digital Ltd",
+  "inputs": [
+    {
+      "name": "targetEnvironment",
+      "type": "string",
+      "label": "Target environment",
+      "required": true,
+      "helpMarkDown": "The target environment."
+    }
+  ],
+  "execution": {
+    "Node16": {
+      "target": "src/index.js",
+      "argumentFormat": ""
+    }
+  },
+  "version": {
+    "Major": 0,
+    "Minor": 0,
+    "Patch": 0
+  }
+}

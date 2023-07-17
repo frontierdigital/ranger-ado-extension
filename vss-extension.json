@@ -22,6 +22,9 @@
     },
     {
       "path": "tasks/InstallRangerCLI"
+    },
+    {
+      "path": "tasks/PromoteSet"
     }
   ],
   "contributions": [
@@ -43,6 +46,16 @@
       ],
       "properties": {
         "name": "tasks/InstallRangerCLI"
+      }
+    },
+    {
+      "id": "promote-set",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "tasks/PromoteSet"
       }
     }
   ]

@@ -62,9 +62,6 @@ async function run() {
 
     await tl.exec(path.join(toolDirPath, 'ranger'), ['version']);
 
-    // eslint-disable-next-line no-console
-    console.log(`Ranger CLI ${version} installed successfully.`);
-
     tl.setResult(tl.TaskResult.Succeeded, 'Success');
   } catch (err) {
     if (err instanceof Error) {

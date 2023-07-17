@@ -7,7 +7,7 @@ on:
       - published
 
 jobs:
-  release:
+  publish:
     runs-on: ubuntu-latest
     environment: visual-studio-marketplace
     steps:
@@ -15,10 +15,10 @@ jobs:
         with:
           node-version: 16
       - run: npm install -g tfx-cli
-      - run: echo ${{ github.event.release.tag_name }}
-      # - run: |
-      #     npx tfx-cli extension publish \
-      #       --vsix $(find ${{ steps.download.outputs.download-path }} -regex ".*\.\(vsix\)") \
-      #       --service-url https://marketplace.visualstudio.com \
-      #       --token "${{ secrets.VISUAL_STUDIO_MARKETPLACE_TOKEN }}" \
-      #       --share-with "${{ secrets.VISUAL_STUDIO_MARKETPLACE_PUBLISHER }}"
+      - run: wget -O "${GITHUB_WORKSPACE}/extension.vsix" ${{ github.event.release.assets_url }}/FrontierDigital.Ranger-${{ github.event.release.tag_name }}.vsix
+      - run: |
+          npx tfx-cli extension publish \
+            --vsix "${GITHUB_WORKSPACE}/extension.vsix" \
+            --service-url https://marketplace.visualstudio.com \
+            --token "${{ secrets.VISUAL_STUDIO_MARKETPLACE_TOKEN }}" \
+            --share-with "${{ secrets.VISUAL_STUDIO_MARKETPLACE_PUBLISHER }}"

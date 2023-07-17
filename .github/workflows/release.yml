@@ -14,6 +14,7 @@ jobs:
     steps:
       - id: get_version
         run: |
+          echo ${{ github.tag_name }}
           version=$(echo "${{ github.ref }}" | cut -d "/" -f 3)
           echo "version=${version}" >> "$GITHUB_OUTPUT"
   build:

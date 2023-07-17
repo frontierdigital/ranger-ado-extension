@@ -18,10 +18,23 @@
   },
   "files": [
     {
+      "path": "tasks/DeploySet"
+    },
+    {
       "path": "tasks/InstallRangerCLI"
     }
   ],
   "contributions": [
+    {
+      "id": "deploy-set",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "tasks/DeploySet"
+      }
+    },
     {
       "id": "install-ranger-cli",
       "type": "ms.vss-distributed-task.task",

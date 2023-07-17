@@ -18,9 +18,9 @@ const build = async () => {
 
   const pathsToCopy = [
     'images',
-    'tasks',
-    'package.json',
     'package-lock.json',
+    'package.json',
+    'tasks',
     'vss-extension.json',
   ];
   await Promise.all(
@@ -35,7 +35,7 @@ const build = async () => {
     ),
   );
 
-  await exec(`npm --prefix ${tempDirPath} ci`);
+  await exec(`npm --prefix ${tempDirPath} ci --omit=dev`);
 
   await Promise.all(manifestDefinition.files.map(async (file) => {
     const findResult = await exec(`find ${path.join(tempDirPath, file.path)} -type f -name package.json -maxdepth 3 -exec dirname {} \\;`);

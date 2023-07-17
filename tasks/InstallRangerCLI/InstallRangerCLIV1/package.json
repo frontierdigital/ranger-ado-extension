@@ -1,10 +1,8 @@
 {
   "name": "install-ranger-cli-task",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "",
   "scripts": {
-    "build": "run-p build:*",
-    "build:update-task-version": "node ./scripts/updateTaskVersion.js",
     "prune": "npm prune --omit=dev",
     "test": "run-p test:*",
     "test:js": "eslint ."

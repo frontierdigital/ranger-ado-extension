@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
+    "build": "node ./scripts/build.js",
     "install": "run-p install:*",
     "install:tasks": "find ./tasks -type d -regex \".*V[0-9]\" -maxdepth 2 -exec npm --prefix {} install \\;",
-    "release": "node ./scripts/release.js",
     "test": "run-p test:*",
     "test:js": "eslint .",
     "test:tasks": "find ./tasks -type d -regex \".*V[0-9]\" -maxdepth 2 -exec npm --prefix {} test \\;"

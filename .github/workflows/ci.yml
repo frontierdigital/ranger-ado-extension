@@ -32,7 +32,7 @@ jobs:
           echo "node_version=${node_version}" >> "$GITHUB_OUTPUT"
       - id: get_tfx_cli_version
         run: |
-          tfx_cli_version=$(cat "${GITHUB_WORKSPACE}/package.json" | jq -r ".devDependencies[\"tfx-cli\"]")
+          tfx_cli_version=$(cat "${GITHUB_WORKSPACE}/package.json" | jq -r ".dependencies[\"tfx-cli\"]")
           echo "tfx_cli_version=${tfx_cli_version}" >> "$GITHUB_OUTPUT"
   publish:
     runs-on: ubuntu-latest

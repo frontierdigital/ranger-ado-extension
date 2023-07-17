@@ -60,7 +60,7 @@ async function run() {
     // eslint-disable-next-line no-console
     console.log(`##vso[task.prependpath]${toolDirPath}`);
 
-    await tl.exec('ranger', ['version'], { env: { ...process.env, PATH: `${process.env.PATH};${toolDirPath}` } });
+    await tl.exec(path.join(toolDirPath, 'ranger'), ['version']);
 
     // eslint-disable-next-line no-console
     console.log(`Ranger CLI ${version} installed successfully.`);

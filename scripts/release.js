@@ -7,7 +7,7 @@ const { rimraf } = require('rimraf');
 
 const exec = require('./helpers/exec');
 
-const build = async () => {
+const release = async () => {
   const packageDefinition = JSON.parse(await fs.readFile(path.join(process.cwd(), 'package.json'), 'utf8'));
 
   const manifestDefinition = JSON.parse(await fs.promises.readFile(path.join(process.cwd(), 'vss-extension.json'), 'utf8'));
@@ -71,4 +71,4 @@ const build = async () => {
   await rimraf(tempDirPath);
 };
 
-build();
+release();

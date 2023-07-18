@@ -64,8 +64,10 @@ jobs:
           name: dist
           path: ${{ github.workspace }}
       - run: |
+          version="${${{ needs.preflight.outputs.version }}%-pre}"
           npx tfx-cli extension publish \
             --vsix "${GITHUB_WORKSPACE}/FrontierDigital.Ranger-${{ needs.preflight.outputs.version }}.vsix" \
+            --override "{ \"version\": \"${version}\" }" \
             --service-url https://marketplace.visualstudio.com \
             --token "${{ secrets.VISUAL_STUDIO_MARKETPLACE_TOKEN }}" \
             --share-with "${{ secrets.VISUAL_STUDIO_MARKETPLACE_PUBLISHER }}"

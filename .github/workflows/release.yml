@@ -13,23 +13,7 @@ jobs:
       version: ${{ steps.get_version.outputs.version }}
     steps:
       - id: get_version
-        run: |
-          set -euo pipefail
-
-          version="${GITHUB_REF#refs/*/}"
-          echo "Version: ${version}"
-          echo "version=$version" >> "$GITHUB_OUTPUT"
-
-          vsix_compatible_version="${version%-pre}"
-          echo "VSIX compatible version: ${vsix_compatible_version}"
-          echo "vsix_compatible_version=$vsix_compatible_version" >> "$GITHUB_OUTPUT"
-
-          is_prerelease="false"
-          if [[ "$version" =~ .*pre$ ]]; then
-            is_prerelease="true"
-          fi
-          echo "Is prerelease: ${is_prerelease}"
-          echo "is_prerelease=$is_prerelease" >> "$GITHUB_OUTPUT"
+        run: echo "version=${GITHUB_REF#refs/*/}" >> "$GITHUB_OUTPUT"
   build:
     uses: ./.github/workflows/build.yml
     needs: preflight
@@ -54,14 +38,14 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
           draft: true
-          prerelease: ${{ endsWith(needs.preflight.outputs.version, 'pre') && true || false }}
+          prerelease: ${{ needs.build.outputs.is_pre_release }}
       - uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: "${{ github.workspace }}/FrontierDigital.Ranger-${{ needs.preflight.outputs.version }}.vsix"
-          asset_name: "FrontierDigital.Ranger-${{ needs.preflight.outputs.version }}.vsix"
+          asset_path: "${{ github.workspace }}/${{ needs.build.outputs.vsix_file_name }}"
+          asset_name: ${{ needs.build.outputs.vsix_file_name }}
           asset_content_type: application/gzip
   publish:
     runs-on: ubuntu-latest
@@ -80,11 +64,8 @@ jobs:
           name: dist
           path: ${{ github.workspace }}
       - run: |
-          version="${{ needs.preflight.outputs.version }}"
-          compliant_version="${version%-pre}"
           npx tfx-cli extension publish \
-            --vsix "${GITHUB_WORKSPACE}/FrontierDigital.Ranger-${{ needs.preflight.outputs.version }}.vsix" \
-            --override "{ \"version\": \"${compliant_version}\" }" \
+            --vsix "${GITHUB_WORKSPACE}/${{ needs.build.outputs.vsix_file_name }}" \
             --service-url https://marketplace.visualstudio.com \
             --token "${{ secrets.VISUAL_STUDIO_MARKETPLACE_TOKEN }}" \
             --share-with "${{ secrets.VISUAL_STUDIO_MARKETPLACE_PUBLISHER }}"

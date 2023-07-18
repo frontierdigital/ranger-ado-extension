@@ -9,12 +9,15 @@ const exec = require('./helpers/exec');
 
 const build = async () => {
   const version = process.argv[2];
+  const outputsFilePath = process.argv[3];
 
-  const manifestDefinition = JSON.parse(await fs.promises.readFile(path.join(process.cwd(), 'vss-extension.json'), 'utf8'));
+  const isPreRelease = version.endsWith('-pre');
 
   const tempDirPath = await tempdir();
 
   await rimraf(tempDirPath);
+
+  const manifestDefinition = JSON.parse(await fs.promises.readFile(path.join(process.cwd(), 'vss-extension.json'), 'utf8'));
 
   const pathsToCopy = [
     'images',
@@ -35,7 +38,7 @@ const build = async () => {
     ),
   );
 
-  await exec(`npm --prefix ${tempDirPath} ci --omit=dev`);
+  await exec(`npm --prefix ${tempDirPath} ci`);
 
   await Promise.all(manifestDefinition.files.map(async (file) => {
     const findResult = await exec(`find ${path.join(tempDirPath, file.path)} -type f -name package.json -maxdepth 3 -exec dirname {} \\;`);
@@ -56,10 +59,16 @@ const build = async () => {
     }));
   }));
 
-  await exec(
+  const override = {
+    id: isPreRelease ? `${manifestDefinition.id}PreRelease` : manifestDefinition.id,
+    name: isPreRelease ? `${manifestDefinition.name} (Pre-Release)` : manifestDefinition.name,
+    version: isPreRelease ? version.split('-')[0] : version,
+  };
+
+  const stdout = await exec(
     [
       'npx tfx extension create',
-      `--override '${JSON.stringify({ version })}'`,
+      `--override '${JSON.stringify(override)}'`,
       `--output-path "${path.join(process.cwd(), 'dist')}"`,
     ].join(' '),
     {
@@ -68,7 +77,14 @@ const build = async () => {
     },
   );
 
+  const stdoutLines = stdout.split('\n');
+  const vsixFilePath = stdoutLines[4].split(':')[1].trim();
+  const vsixFileName = vsixFilePath.split('/').pop();
+
   await rimraf(tempDirPath);
+
+  await fs.appendFile(outputsFilePath, `is_pre_release=${isPreRelease}\n`);
+  await fs.appendFile(outputsFilePath, `vsix_file_name=${vsixFileName}\n`);
 };
 
 build();

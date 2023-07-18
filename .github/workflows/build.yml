@@ -9,17 +9,23 @@ on:
         default: "0.0.0"
         type: string
     outputs:
+      is_pre_release:
+        value: ${{ jobs.build.outputs.is_pre_release }}
       node_version:
         value: ${{ jobs.build.outputs.node_version }}
       tfx_cli_version:
         value: ${{ jobs.build.outputs.tfx_cli_version }}
+      vsix_file_name:
+        value: ${{ jobs.build.outputs.vsix_file_name }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
+      is_pre_release: ${{ steps.build.outputs.is_pre_release }}
       node_version: ${{ steps.get_node_version.outputs.node_version }}
       tfx_cli_version: ${{ steps.get_tfx_cli_version.outputs.tfx_cli_version }}
+      vsix_file_name: ${{ steps.build.outputs.vsix_file_name }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -29,7 +35,8 @@ jobs:
           node-version-file: .nvmrc
       - run: npm ci
       - run: npm test
-      - run: npm run build ${{ inputs.version }}
+      - id: build
+        run: npm run build "${{ inputs.version }}" "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v3
         with:
           name: dist

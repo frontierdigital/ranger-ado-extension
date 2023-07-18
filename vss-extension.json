@@ -3,7 +3,7 @@
   "id": "Ranger",
   "name": "Ranger",
   "publisher": "FrontierDigital",
-  "version": "0.0.0",
+  "version": "",
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"

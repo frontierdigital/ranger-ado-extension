@@ -1,0 +1,62 @@
+{
+  "manifestVersion": 1,
+  "id": "Ranger",
+  "name": "Ranger",
+  "publisher": "FrontierDigital",
+  "version": "",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "description": "",
+  "categories": [
+    "Azure Pipelines"
+  ],
+  "icons": {
+    "default": "images/extension-icon.png"
+  },
+  "files": [
+    {
+      "path": "tasks/DeploySet"
+    },
+    {
+      "path": "tasks/InstallRangerCLI"
+    },
+    {
+      "path": "tasks/PromoteSet"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "deploy-set",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "tasks/DeploySet"
+      }
+    },
+    {
+      "id": "install-ranger-cli",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "tasks/InstallRangerCLI"
+      }
+    },
+    {
+      "id": "promote-set",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "tasks/PromoteSet"
+      }
+    }
+  ]
+}

@@ -28,8 +28,8 @@ jobs:
           if [[ "$version" =~ .*pre$ ]]; then
             is_prerelease="true"
           fi
-          echo "Is pre-release: ${is_prerelease}"
-          echo "is_prerelease=$is_prerelease >> "$GITHUB_OUTPUT"
+          echo "Is prerelease: ${is_prerelease}"
+          echo "is_prerelease=$is_prerelease" >> "$GITHUB_OUTPUT"
   build:
     uses: ./.github/workflows/build.yml
     needs: preflight

@@ -13,7 +13,23 @@ jobs:
       version: ${{ steps.get_version.outputs.version }}
     steps:
       - id: get_version
-        run: echo "version=${GITHUB_REF#refs/*/}" >> "$GITHUB_OUTPUT"
+        run: |
+          set -euo pipefail
+
+          version="${GITHUB_REF#refs/*/}"
+          echo "Version: ${version}"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+          vsix_compatible_version="${version%-pre}"
+          echo "VSIX compatible version: ${vsix_compatible_version}"
+          echo "vsix_compatible_version=$vsix_compatible_version" >> "$GITHUB_OUTPUT"
+
+          is_prerelease="false"
+          if [[ "$version" =~ .*pre$ ]]; then
+            is_prerelease="true"
+          fi
+          echo "Is pre-release: ${is_prerelease}"
+          echo "is_prerelease=$is_prerelease >> "$GITHUB_OUTPUT"
   build:
     uses: ./.github/workflows/build.yml
     needs: preflight

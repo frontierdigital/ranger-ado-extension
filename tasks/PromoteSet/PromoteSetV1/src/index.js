@@ -4,10 +4,23 @@ const tl = require('azure-pipelines-task-lib/task');
 
 async function run() {
   try {
+    const organisationName = tl.getInput('organisationName', true);
+    const projectName = tl.getInput('projectName', true);
     const targetEnvironment = tl.getInput('targetEnvironment', true);
 
-    // eslint-disable-next-line no-console
-    console.log(`Promote to ${targetEnvironment}`);
+    await tl.exec(
+      'ranger',
+      [
+        'promote',
+        'manifest',
+        '--organisation-name',
+        organisationName,
+        '--project-name',
+        projectName,
+        '--target-environment',
+        targetEnvironment,
+      ],
+    );
 
     tl.setResult(tl.TaskResult.Succeeded, 'Success');
   } catch (err) {

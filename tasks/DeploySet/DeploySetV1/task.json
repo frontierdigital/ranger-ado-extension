@@ -3,6 +3,7 @@
   "id": "a8d3b79d-2c65-41fc-9593-f33365a6d526",
   "name": "DeploySet",
   "friendlyName": "Deploy set",
+  "instanceNameFormat": "Deploy set",
   "description": "Deploys a set using Ranger",
   "helpUrl": "https://github.com/frontierdigital/ranger-ado-extension/tasks/DeploySet/README.md",
   "category": "Utility",
@@ -20,7 +21,7 @@
       "type": "string",
       "label": "Git user name",
       "required": true,
-      "helpMarkDown": "The git user namet"
+      "helpMarkDown": "The git user name"
     },
     {
       "name": "organisationName",

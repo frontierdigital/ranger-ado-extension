@@ -15,7 +15,7 @@ async function run() {
       'ranger',
       [
         'promote',
-        'manifest',
+        'set',
         '--organisation-name',
         organisationName,
         '--project-name',

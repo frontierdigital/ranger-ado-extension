@@ -6,10 +6,10 @@ async function run() {
   try {
     const gitUserEmail = tl.getInput('gitUserEmail', true);
     const gitUserName = tl.getInput('gitUserName', true);
+    const nextEnvironment = tl.getInput('nextEnvironment', true);
     const organisationName = tl.getInput('organisationName', true);
     const pat = tl.getInput('pat', true);
     const projectName = tl.getInput('projectName', true);
-    const targetEnvironment = tl.getInput('targetEnvironment', true);
 
     await tl.exec(
       'ranger',
@@ -20,8 +20,8 @@ async function run() {
         organisationName,
         '--project-name',
         projectName,
-        '--target-environment',
-        targetEnvironment,
+        '--next-environment',
+        nextEnvironment,
       ],
       {
         env: {

@@ -10,6 +10,13 @@
   "author": "Frontier Digital Ltd",
   "inputs": [
     {
+      "name": "nextEnvironment",
+      "type": "string",
+      "label": "Next environment",
+      "required": true,
+      "helpMarkDown": "The next environment to promote this set to"
+    },
+    {
       "name": "organisationName",
       "type": "string",
       "label": "Organisation name",
@@ -22,13 +29,6 @@
       "label": "Project name",
       "required": true,
       "helpMarkDown": "The Azure DevOps project name"
-    },
-    {
-      "name": "targetEnvironment",
-      "type": "string",
-      "label": "Target environment",
-      "required": true,
-      "helpMarkDown": "The target environment to promote this set to"
     }
   ],
   "execution": {

@@ -14,7 +14,7 @@ async function run() {
       'ranger',
       [
         'deploy',
-        'manifest', // TODO: set
+        'set',
         '--organisation-name',
         organisationName,
         '--project-name',

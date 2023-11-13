@@ -1,6 +1,6 @@
 {
-  "name": "install-ranger-cli-task",
-  "version": "1.0.23",
+  "name": "promote-set-task",
+  "version": "0.0.5",
   "description": "",
   "scripts": {
     "test": "run-p test:*",
@@ -10,7 +10,6 @@
   "author": "Frontier Digital Ltd",
   "license": "GPL-3.0",
   "dependencies": {
-    "axios": "^1.4.0",
     "azure-pipelines-task-lib": "^4.4.0"
   },
   "devDependencies": {

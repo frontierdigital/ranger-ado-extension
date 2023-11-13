@@ -6,7 +6,6 @@ async function run() {
   try {
     const gitUserEmail = tl.getInput('gitUserEmail', true);
     const gitUserName = tl.getInput('gitUserName', true);
-    const nextEnvironment = tl.getInput('nextEnvironment', true);
     const organisationName = tl.getInput('organisationName', true);
     const pat = tl.getInput('pat', true);
     const projectName = tl.getInput('projectName', true);
@@ -20,8 +19,6 @@ async function run() {
         organisationName,
         '--project-name',
         projectName,
-        '--next-environment',
-        nextEnvironment,
       ],
       {
         env: {

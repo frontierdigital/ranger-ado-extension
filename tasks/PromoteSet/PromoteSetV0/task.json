@@ -10,13 +10,6 @@
   "author": "Frontier Digital Ltd",
   "inputs": [
     {
-      "name": "nextEnvironment",
-      "type": "string",
-      "label": "Next environment",
-      "required": true,
-      "helpMarkDown": "The next environment to promote this set to"
-    },
-    {
       "name": "organisationName",
       "type": "string",
       "label": "Organisation name",
